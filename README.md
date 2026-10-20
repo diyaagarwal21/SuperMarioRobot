@@ -4,3 +4,6 @@ URDF Package --> exported from SolidWorks (had to manually change inertias + mas
 
 Important files:
 mujoco-test.py --> run this file to see the model in MuJoCo
+
+Helpful links:
+https://viewer.robotsfan.com/ --> use this link to check how the URDF model works!
