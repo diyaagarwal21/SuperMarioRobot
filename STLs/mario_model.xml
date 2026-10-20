@@ -1,0 +1,98 @@
+<mujoco model="biped">
+    <compiler angle="radian" meshdir="." inertiafromgeom="false" autolimits="true"/>
+    <option gravity="0 0 -9.81">
+        <flag contact="enable"/>
+    </option>
+
+    <default>
+        <mesh scale="1 1 1"/>
+        <joint type="hinge" limited="true" damping="0.1" armature="0.01"/>
+        <geom type="mesh" contype="1" conaffinity="1" friction="1.0 0.005 0.0001"/>
+        <position ctrllimited="true" kp="60" kv="0.1"/>
+    </default>
+
+    <asset>
+        <mesh name="base_link_mesh" file="base_link.STL"/>
+        <mesh name="R_thigh_link_mesh" file="R_thigh_link.STL"/>
+        <mesh name="R_shin_link_mesh" file="R_shin_link.STL"/>
+        <mesh name="R_foot_link_mesh" file="R_foot_link.STL"/>
+        <mesh name="L_thigh_link_mesh" file="L_thigh_link.STL"/>
+        <mesh name="L_shin_link_mesh" file="L_shin_link.STL"/>
+        <mesh name="L_foot_link_mesh" file="L_foot_link.STL"/>
+    </asset>
+
+    <worldbody>
+        <geom name="ground" type="plane" pos="0 0 0" size="3 3 0.1" rgba="0.8 0.8 0.8 1" friction="1.0 0.005 0.0001"/>
+
+        <body name="base_link" pos="0 0 1">
+            <inertial pos="-0.00048087 0 -0.080831"
+                      mass="8.16"
+                      fullinertia="0.135032 0.0457623 0.138844 -9.44401e-18 0.000218288 3.69317e-18"/>
+            <geom name="base_link_geom" mesh="base_link_mesh" rgba="0.8667 0.9098 1 1"/>
+
+            <body name="R_thigh_link" pos="0 -0.1397 -0.1524">
+                <joint name="R_hip_joint" axis="0 -1 0" range="-1.57 1.57"/>
+                <inertial pos="0.11311 0 -0.24907"
+                          mass="3.18"
+                          fullinertia="0.0542482 0.0647248 0.0252853 -5.71139e-18 0.0165695 8.17732e-18"/>
+                <geom name="R_thigh_link_geom" mesh="R_thigh_link_mesh" rgba="0.8667 0.9098 1 1"/>
+
+                <body name="R_shin_link" pos="0.18904 0 -0.41629">
+                    <joint name="R_knee_joint" axis="0 -1 0" range="-2.35 0"/>
+                    <inertial pos="-0.0111565002700722 0 -0.204796693871201"
+                              mass="1.36"
+                              fullinertia="0.0200031 0.0195797 0.00985761 -1.0883e-18 -0.000554331 2.27367e-18"/>
+                    <geom name="R_shin_link_geom" mesh="R_shin_link_mesh" rgba="0.8667 0.9098 1 1"/>
+
+                    <body name="R_foot_link" pos="-0.0258624343131615 0.00252757205257415 -0.479362911655585">
+                        <inertial pos="0.0058626 -0.0025276 0.11223"
+                                  mass="0.68"
+                                  fullinertia="0.00134319 0.00212289 0.00195605 -2.22926e-19 3.34852e-05 8.85833e-20"/>
+                        <geom name="R_foot_link_geom" mesh="R_foot_link_mesh" rgba="0.8667 0.9098 1 1" friction="2 0.05 0.01"/>
+                        <site name="right_foot_contact" pos="0 0 -0.112" size="0.008" rgba="1 0 0 1"/>
+                    </body>
+                </body>
+            </body>
+
+            <body name="L_thigh_link" pos="0 0.1397 -0.1524">
+                <joint name="L_hip_joint" axis="0 -1 0" range="-1.57 1.57"/>
+                <inertial pos="-0.0458920953361224 0 -0.269672206329584"
+                          mass="3.18"
+                          fullinertia="0.0605337 0.0647247 0.018999 1.61598e-18 -0.00727905 -8.02178e-18"/>
+                <geom name="L_thigh_link_geom" mesh="L_thigh_link_mesh" rgba="0.8667 0.9098 1 1"/>
+
+                <body name="L_shin_link" pos="-0.0767023387367376 0 -0.450720080795517">
+                    <joint name="L_knee_joint" axis="0 -1 0" range="-2.35 0"/>
+                    <inertial pos="-0.00511314971611054 0 -0.205036604095052"
+                              mass="1.36"
+                              fullinertia="0.020027 0.0195797 0.00983375 9.3026e-19 -0.000254354 4.00535e-18"/>
+                    <geom name="L_shin_link_geom" mesh="L_shin_link_mesh" rgba="0.8667 0.9098 1 1"/>
+
+                    <body name="L_foot_link" pos="-0.0119678911325494 0.00254000000000276 -0.479910797109048">
+                        <inertial pos="0.00280174825864354 -0.00254000000000021 0.112349721869339"
+                                  mass="0.68"
+                                  fullinertia="0.00134175 0.00212294 0.00195749 2.59593e-19 1.53646e-05 3.71312e-19"/>
+                        <geom name="L_foot_link_geom" mesh="L_foot_link_mesh" rgba="0.8667 0.9098 1 1" friction="2 0.05 0.01"/>
+                        <site name="left_foot_contact" pos="0 0 -0.112" size="0.008" rgba="0 0 1 1"/>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+    <actuator>
+        <position name="R_hip_joint_act" joint="R_hip_joint" ctrlrange="-1.57 1.57" forcerange="-40 40"/>
+        <position name="R_knee_joint_act" joint="R_knee_joint" ctrlrange="-2.35 0" forcerange="-30 30"/>
+        <position name="L_hip_joint_act" joint="L_hip_joint" ctrlrange="-1.57 1.57" forcerange="-40 40"/>
+        <position name="L_knee_joint_act" joint="L_knee_joint" ctrlrange="-2.35 0" forcerange="-30 30"/>
+    </actuator>
+
+    <contact>
+        <exclude body1="base_link" body2="R_thigh_link"/>
+        <exclude body1="base_link" body2="L_thigh_link"/>
+        <exclude body1="R_thigh_link" body2="R_shin_link"/>
+        <exclude body1="L_thigh_link" body2="L_shin_link"/>
+        <exclude body1="R_shin_link" body2="R_foot_link"/>
+        <exclude body1="L_shin_link" body2="L_foot_link"/>
+    </contact>
+</mujoco>

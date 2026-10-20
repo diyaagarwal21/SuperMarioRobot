@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="prelim-design-mario-ver3">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.00048087 -2.2204E-16 -0.080831"
+        rpy="0 0 0" />
+      <mass
+        value="8.16" />
+      <inertia
+        ixx="0.135032"
+        ixy="-9.44401e-18"
+        ixz="0.000218288"
+        iyy="0.0457623"
+        iyz="3.69317e-18"
+        izz="0.138844" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.86667 0.9098 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="R_thigh_link">
+    <inertial>
+      <origin
+        xyz="0.11311 -1.1102E-16 -0.24907"
+        rpy="0 0 0" />
+      <mass
+        value="3.18" />
+      <inertia
+        ixx="0.0542482"
+        ixy="-5.71139e-18"
+        ixz="0.0165695"
+        iyy="0.0647248"
+        iyz="8.17732e-18"
+        izz="0.0252853" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/R_thigh_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.86667 0.9098 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/R_thigh_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="R_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0 -0.1397 -0.1524"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="R_thigh_link" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="40"
+      velocity="10" />
+  </joint>
+  <link
+    name="R_shin_link">
+    <inertial>
+      <origin
+        xyz="-0.0111565002700722 -2.22044604925031E-16 -0.204796693871201"
+        rpy="0 0 0" />
+      <mass
+        value="1.36" />
+      <inertia
+        ixx="0.0200031"
+        ixy="-1.0883e-18"
+        ixz="-0.000554331"
+        iyy="0.0195797"
+        iyz="2.27367e-18"
+        izz="0.00985761" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/R_shin_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.866666666666667 0.909803921568627 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/R_shin_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="R_knee_joint"
+    type="revolute">
+    <origin
+      xyz="0.18904 0 -0.41629"
+      rpy="0 0 0" />
+    <parent
+      link="R_thigh_link" />
+    <child
+      link="R_shin_link" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-2.35"
+      upper="0"
+      effort="30"
+      velocity="12" />
+  </joint>
+  <link
+    name="R_foot_link">
+    <inertial>
+      <origin
+        xyz="0.0058626 -0.0025276 0.11223"
+        rpy="0 0 0" />
+      <mass
+        value="0.68" />
+      <inertia
+        ixx="0.00134319"
+        ixy="-2.22926e-19"
+        ixz="3.34852e-05"
+        iyy="0.00212289"
+        iyz="8.85833e-20"
+        izz="0.00195605" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/R_foot_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.86667 0.9098 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/R_foot_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="R_foot_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0258624343131615 0.00252757205257415 -0.479362911655585"
+      rpy="0 0 0" />
+    <parent
+      link="R_shin_link" />
+    <child
+      link="R_foot_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="L_thigh_link">
+    <inertial>
+      <origin
+        xyz="-0.0458920953361224 0 -0.269672206329584"
+        rpy="0 0 0" />
+      <mass
+        value="3.18" />
+      <inertia
+        ixx="0.0605337"
+        ixy="1.61598e-18"
+        ixz="-0.00727905"
+        iyy="0.0647247"
+        iyz="-8.02178e-18"
+        izz="0.018999" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/L_thigh_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/L_thigh_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="L_hip_joint"
+    type="revolute">
+    <origin
+      xyz="0 0.1397 -0.1524"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="L_thigh_link" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-1.57"
+      upper="1.57"
+      effort="40"
+      velocity="10" />
+  </joint>
+  <link
+    name="L_shin_link">
+    <inertial>
+      <origin
+        xyz="-0.00511314971611054 3.33066907387547E-16 -0.205036604095052"
+        rpy="0 0 0" />
+      <mass
+        value="1.36" />
+      <inertia
+        ixx="0.020027"
+        ixy="9.3026e-19"
+        ixz="-0.000254354"
+        iyy="0.0195797"
+        iyz="4.00535e-18"
+        izz="0.00983375" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/L_shin_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.866666666666667 0.909803921568627 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/L_shin_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="L_knee_joint"
+    type="revolute">
+    <origin
+      xyz="-0.0767023387367376 0 -0.450720080795517"
+      rpy="0 0 0" />
+    <parent
+      link="L_thigh_link" />
+    <child
+      link="L_shin_link" />
+    <axis
+      xyz="0 -1 0" />
+    <limit
+      lower="-2.35"
+      upper="0"
+      effort="30"
+      velocity="12" />
+  </joint>
+  <link
+    name="L_foot_link">
+    <inertial>
+      <origin
+        xyz="0.00280174825864354 -0.00254000000000021 0.112349721869339"
+        rpy="0 0 0" />
+      <mass
+        value="0.68" />
+      <inertia
+        ixx="0.00134175"
+        ixy="2.59593e-19"
+        ixz="1.53646e-05"
+        iyy="0.00212294"
+        iyz="3.71312e-19"
+        izz="0.00195749" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/L_foot_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.866666666666667 0.909803921568627 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://prelim-design-mario-ver3/meshes/L_foot_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="L_foot_joint"
+    type="fixed">
+    <origin
+      xyz="-0.0119678911325494 0.00254000000000276 -0.479910797109048"
+      rpy="0 0 0" />
+    <parent
+      link="L_shin_link" />
+    <child
+      link="L_foot_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+</robot>
