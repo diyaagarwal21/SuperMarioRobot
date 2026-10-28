@@ -1,0 +1,84 @@
+<mujoco model="mario_primitive">
+    <compiler angle="radian" inertiafromgeom="false" autolimits="true"/>
+    <option gravity="0 0 -9.81">
+        <flag contact="enable"/>
+    </option>
+
+    <default>
+        <joint type="hinge" limited="true" damping="0" armature="0.01"/>
+        <!-- Robot geoms collide with the floor only (contype 2 vs floor conaffinity 1), never with each other -->
+        <geom contype="2" conaffinity="1" friction="1.0 0.005 0.0001" rgba="0.8667 0.9098 1 1"/>
+    </default>
+
+    <worldbody>
+        <!-- Planar base: qpos = (px, pz, phi). At qpos = 0 the torso box rests on the floor (base frame 0.2095 m above it), so pz is the torso height above the floor -->
+        <body name="base_link" pos="0 0 0.2095">
+            <joint name="base_px" type="slide" axis="1 0 0" limited="false" armature="0"/>
+            <joint name="base_pz" type="slide" axis="0 0 1" limited="false" armature="0"/>
+            <joint name="base_phi" type="hinge" axis="0 1 0" limited="false" armature="0"/>
+            <inertial pos="-0.00048087 0 -0.080831" mass="8.16"
+                      fullinertia="0.135032 0.0457623 0.138844 -9.45274e-18 0.000218288 3.69782e-18"/>
+            <geom name="torso_geom" type="box" pos="0.00000 0.00000 -0.10475" size="0.10160 0.20320 0.10475"/>
+
+            <body name="L_thigh_link" pos="0 0.1397 -0.1524">
+                <joint name="L_hip_joint" axis="0 1 0" range="-1.57 1.57"/>
+                <inertial pos="0 0 -0.27355" mass="3.18"
+                          fullinertia="0.0617733 0.0647248 0.0177602 2.44736e-19 2.17792e-18 7.75641e-18"/>
+                <geom name="L_thigh_geom" type="box" pos="0.00000 0.00000 -0.23173" size="0.10160 0.07620 0.28253"/>
+
+                <body name="L_shin_link" pos="0 0 -0.4572">
+                    <joint name="L_knee_joint" axis="0 1 0" range="0 2.35"/>
+                    <inertial pos="0 0 -0.2051" mass="1.36"
+                              fullinertia="0.0200337 0.0195804 0.0098275 -4.23344e-19 -5.94726e-19 5.01804e-18"/>
+                    <geom name="L_shin_geom" type="box" pos="0.00000 0.00000 -0.17780" size="0.10160 0.08890 0.22860"/>
+
+                    <body name="L_foot_link" pos="0 0.00254 -0.48006">
+                        <inertial pos="0 -0.00254 0.11238" mass="0.68"
+                                  fullinertia="0.00134137 0.00212289 0.00195782 -2.69015e-19 8.3668e-20 2.54265e-19"/>
+                        <geom name="L_foot_geom" type="sphere" pos="0.0 -0.0025 0.0483" size="0.0483" friction="2 0.05 0.01"/>
+                        <!-- visual only: mounting bracket above the ball -->
+                        <geom name="L_foot_bracket" type="box" pos="0.0000 -0.0025 0.1118" size="0.0762 0.0508 0.0635" contype="0" conaffinity="0" rgba="0.6 0.65 0.75 1"/>
+                        <site name="left_foot_contact" pos="0.0 -0.0025 0" size="0.008" rgba="0 0 1 1"/>
+                    </body>
+                </body>
+            </body>
+
+            <body name="R_thigh_link" pos="0 -0.1397 -0.1524">
+                <joint name="R_hip_joint" axis="0 1 0" range="-1.57 1.57"/>
+                <inertial pos="0 0 -0.27355" mass="3.18"
+                          fullinertia="0.0617733 0.0647248 0.0177602 4.39594e-19 2.00921e-18 7.40711e-18"/>
+                <geom name="R_thigh_geom" type="box" pos="0.00000 0.00000 -0.23175" size="0.10160 0.07620 0.28255"/>
+
+                <body name="R_shin_link" pos="0 0 -0.4572">
+                    <joint name="R_knee_joint" axis="0 1 0" range="0 2.35"/>
+                    <inertial pos="0 0 -0.2051" mass="1.36"
+                              fullinertia="0.0200337 0.0195804 0.0098275 -5.5129e-19 -1.67188e-18 3.32809e-18"/>
+                    <geom name="R_shin_geom" type="box" pos="0.00000 0.00000 -0.17780" size="0.10160 0.08890 0.22860"/>
+
+                    <body name="R_foot_link" pos="0.00025096 0.0025276 -0.48006">
+                        <inertial pos="-0.00025096 -0.0025276 0.11238" mass="0.68"
+                                  fullinertia="0.00134137 0.00212289 0.00195782 -1.64075e-19 6.44984e-20 2.19984e-19"/>
+                        <geom name="R_foot_geom" type="sphere" pos="-0.0003 -0.0025 0.0483" size="0.0483" friction="2 0.05 0.01"/>
+                        <!-- visual only: mounting bracket above the ball -->
+                        <geom name="R_foot_bracket" type="box" pos="-0.0003 -0.0025 0.1118" size="0.0762 0.0508 0.0635" contype="0" conaffinity="0" rgba="0.6 0.65 0.75 1"/>
+                        <site name="right_foot_contact" pos="-0.0003 -0.0025 0" size="0.008" rgba="1 0 0 1"/>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+    <!-- Motor: MyActuator RMD-X8 (19.612:1, 48 V): rated 43 N.m, peak 110 N.m (forcerange = peak), no-load 158 RPM = 16.5 rad/s, rated 127 RPM = 13.3 rad/s (speed is not limited by forcerange).
+         Position servos, critically damped for the straight-leg pose: kv = 2*sqrt(kp*I_eff), I_eff includes armature -->
+    <actuator>
+        <position name="L_hip_joint_act" joint="L_hip_joint" ctrlrange="-1.57 1.57" ctrllimited="true" forcerange="-110 110" forcelimited="true" kp="60" kv="18.29"/>
+        <position name="L_knee_joint_act" joint="L_knee_joint" ctrlrange="0 2.35" ctrllimited="true" forcerange="-110 110" forcelimited="true" kp="60" kv="6.59"/>
+        <position name="R_hip_joint_act" joint="R_hip_joint" ctrlrange="-1.57 1.57" ctrllimited="true" forcerange="-110 110" forcelimited="true" kp="60" kv="18.29"/>
+        <position name="R_knee_joint_act" joint="R_knee_joint" ctrlrange="0 2.35" ctrllimited="true" forcerange="-110 110" forcelimited="true" kp="60" kv="6.59"/>
+    </actuator>
+
+    <!-- qpos: base_px base_pz base_phi L_hip L_knee R_hip R_knee ; ball feet 1 mm above the floor (pz = 1.09066 - 0.2095) -->
+    <keyframe>
+        <key name="home" qpos="0 0.88116 0 0 0 0 0" ctrl="0 0 0 0"/>
+    </keyframe>
+</mujoco>

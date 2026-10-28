@@ -24,20 +24,18 @@
                 <joint name="L_hip_joint" axis="0 1 0" range="-1.57 1.57"/>
                 <inertial pos="0 0 -0.27355" mass="3.18"
                           fullinertia="0.0617733 0.0647248 0.0177602 2.44736e-19 2.17792e-18 7.75641e-18"/>
-                <geom name="L_thigh_geom" type="box" pos="0.00000 0.00000 -0.23173" size="0.10160 0.07620 0.28253"/>
+                <geom name="L_thigh_geom" type="capsule" fromto="0 0 0 0 0 -0.4572" size="0.03"/>
 
                 <body name="L_shin_link" pos="0 0 -0.4572">
                     <joint name="L_knee_joint" axis="0 1 0" range="0 2.35"/>
                     <inertial pos="0 0 -0.2051" mass="1.36"
                               fullinertia="0.0200337 0.0195804 0.0098275 -4.23344e-19 -5.94726e-19 5.01804e-18"/>
-                    <geom name="L_shin_geom" type="box" pos="0.00000 0.00000 -0.17780" size="0.10160 0.08890 0.22860"/>
+                    <geom name="L_shin_geom" type="capsule" fromto="0 0 0 0 0 -0.43176" size="0.025"/>
 
                     <body name="L_foot_link" pos="0 0.00254 -0.48006">
                         <inertial pos="0 -0.00254 0.11238" mass="0.68"
                                   fullinertia="0.00134137 0.00212289 0.00195782 -2.69015e-19 8.3668e-20 2.54265e-19"/>
                         <geom name="L_foot_geom" type="sphere" pos="0.0 -0.0025 0.0483" size="0.0483" friction="2 0.05 0.01"/>
-                        <!-- visual only: mounting bracket above the ball -->
-                        <geom name="L_foot_bracket" type="box" pos="0.0000 -0.0025 0.1118" size="0.0762 0.0508 0.0635" contype="0" conaffinity="0" rgba="0.6 0.65 0.75 1"/>
                         <site name="left_foot_contact" pos="0.0 -0.0025 0" size="0.008" rgba="0 0 1 1"/>
                     </body>
                 </body>
@@ -47,20 +45,18 @@
                 <joint name="R_hip_joint" axis="0 1 0" range="-1.57 1.57"/>
                 <inertial pos="0 0 -0.27355" mass="3.18"
                           fullinertia="0.0617733 0.0647248 0.0177602 4.39594e-19 2.00921e-18 7.40711e-18"/>
-                <geom name="R_thigh_geom" type="box" pos="0.00000 0.00000 -0.23175" size="0.10160 0.07620 0.28255"/>
+                <geom name="R_thigh_geom" type="capsule" fromto="0 0 0 0 0 -0.4572" size="0.03"/>
 
                 <body name="R_shin_link" pos="0 0 -0.4572">
                     <joint name="R_knee_joint" axis="0 1 0" range="0 2.35"/>
                     <inertial pos="0 0 -0.2051" mass="1.36"
                               fullinertia="0.0200337 0.0195804 0.0098275 -5.5129e-19 -1.67188e-18 3.32809e-18"/>
-                    <geom name="R_shin_geom" type="box" pos="0.00000 0.00000 -0.17780" size="0.10160 0.08890 0.22860"/>
+                    <geom name="R_shin_geom" type="capsule" fromto="0 0 0 0 0 -0.43176" size="0.025"/>
 
                     <body name="R_foot_link" pos="0.00025096 0.0025276 -0.48006">
                         <inertial pos="-0.00025096 -0.0025276 0.11238" mass="0.68"
                                   fullinertia="0.00134137 0.00212289 0.00195782 -1.64075e-19 6.44984e-20 2.19984e-19"/>
                         <geom name="R_foot_geom" type="sphere" pos="-0.0003 -0.0025 0.0483" size="0.0483" friction="2 0.05 0.01"/>
-                        <!-- visual only: mounting bracket above the ball -->
-                        <geom name="R_foot_bracket" type="box" pos="-0.0003 -0.0025 0.1118" size="0.0762 0.0508 0.0635" contype="0" conaffinity="0" rgba="0.6 0.65 0.75 1"/>
                         <site name="right_foot_contact" pos="-0.0003 -0.0025 0" size="0.008" rgba="1 0 0 1"/>
                     </body>
                 </body>
